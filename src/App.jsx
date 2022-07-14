@@ -1,10 +1,14 @@
 import NavBar from './components/NavBar';
+import ItemListContainer from './components/ItemListContainer';
 
 function App() {
+
+  const greeting = 'Texto importado desde greeting'
+
   return (
     <div>
       <NavBar></NavBar>
-      <h1>EtecLab</h1>
+      <ItemListContainer greeting={greeting} />
     </div>
   );
 }
