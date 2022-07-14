@@ -1,31 +1,66 @@
+import { useState } from "react";
 /* ---------------------------- STYLED COMPONENTS --------------------------- */
 import styled from "styled-components";
-/* ----------------------------- REACT BOOTSTRAP ---------------------------- */
-import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
-import CartWidget from "./CartWidget";
+/* ------------------------------- LINKS DATA ------------------------------- */
+import { Links } from "../data/data";
+/* ------------------------------- COMPONENTES ------------------------------ */
+import NavLinkItem from "./NavLinkItem";
+import BurguerBtn from "./BurguerBtn";
+
+
 
 
 const NavBar = () => {
+
+    const [sideBarState, setSideBarState] = useState(true);
+    
+    const changeState = () =>{
+        setSideBarState(!sideBarState)
+    }
+
     return (  
         <header>
-            <Navbar bg="light" expand="lg">
-                <Container>
-                    <Navbar.Brand href="#home">ETECLAB</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="mx-auto">
-                        <Nav.Link href="#home">Incio</Nav.Link>
-                        <Nav.Link href="#link">Nosotros</Nav.Link>
-                        <Nav.Link href="#link">Tienda</Nav.Link>
-                    </Nav>
-                    <CartWidget></CartWidget>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
+            <SideBar className={sideBarState ? 'open' : ''}>
+                <BurguerBtn state={sideBarState} click={changeState}></BurguerBtn>
+                <div className="links__container">
+                    {Links.map(({ text, to, svg })=> <NavLinkItem key={text} state={sideBarState} to={to} text={text} svg={svg} />)}
+                </div>
+            </SideBar>
         </header>
     );
 }
  
 export default NavBar;
+
+
+const SideBar = styled.nav`
+    width: 60px;
+    height: 80vh;
+    background-color: #282828;
+    transition-duration: .3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .links__container{
+        display: flex;
+        flex-direction: column;
+        margin-top: 80px;
+    }    
+
+    &.open{
+        width: 200px;
+        align-items: flex-end;
+
+        a{
+            text-decoration: none;
+        }
+        .bars__icon{
+            cursor: pointer;
+            margin-right: 17.5px;
+        }
+    }
+
+    .nav-icon-5{
+        margin-top: 30px
+    }
+`
