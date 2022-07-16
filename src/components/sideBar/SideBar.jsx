@@ -2,7 +2,7 @@ import { useState } from "react";
 /* ---------------------------- STYLED COMPONENTS --------------------------- */
 import styled from "styled-components";
 /* ------------------------------- LINKS DATA ------------------------------- */
-import { Links } from "../data/data";
+import { Links } from "../../data/data";
 /* ------------------------------- COMPONENTES ------------------------------ */
 import NavLinkItem from "./NavLinkItem";
 import BurguerBtn from "./BurguerBtn";
@@ -10,9 +10,9 @@ import BurguerBtn from "./BurguerBtn";
 
 
 
-const NavBar = () => {
+const SideBar = () => {
 
-    const [sideBarState, setSideBarState] = useState(true);
+    const [sideBarState, setSideBarState] = useState(false);
     
     const changeState = () =>{
         setSideBarState(!sideBarState)
@@ -20,23 +20,25 @@ const NavBar = () => {
 
     return (  
         <header>
-            <SideBar className={sideBarState ? 'open' : ''}>
+            <SideBarContainer className={sideBarState ? 'open' : ''}>
                 <BurguerBtn state={sideBarState} click={changeState}></BurguerBtn>
                 <div className="links__container">
                     {Links.map(({ text, to, svg })=> <NavLinkItem key={text} state={sideBarState} to={to} text={text} svg={svg} />)}
                 </div>
-            </SideBar>
+            </SideBarContainer>
         </header>
     );
 }
  
-export default NavBar;
+export default SideBar;
 
 
-const SideBar = styled.nav`
+const SideBarContainer = styled.nav`
+
+    border-radius: 20px;
     width: 60px;
     height: 80vh;
-    background-color: #282828;
+    background-color: #034d64;
     transition-duration: .3s;
     display: flex;
     flex-direction: column;
@@ -62,5 +64,36 @@ const SideBar = styled.nav`
 
     .nav-icon-5{
         margin-top: 30px
+    }
+
+
+    @media (max-width: 768px){ 
+        position: fixed;
+        height: 50px;
+        overflow: hidden;
+        
+        .nav-icon-5{
+            margin-top: 15px
+        }
+
+        &.open{
+        width: 100%;
+        max-width: 500px;
+        height: 80vh;
+        align-items: flex-end;
+
+        a{
+            text-decoration: none;
+        }
+        .bars__icon{
+            cursor: pointer;
+            margin-right: 17.5px;
+        }
+
+        .links__container{
+            width: 100%;
+        }
+    }
+
     }
 `

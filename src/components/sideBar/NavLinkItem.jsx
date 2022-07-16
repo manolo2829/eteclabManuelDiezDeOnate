@@ -54,26 +54,6 @@ const NavLinkContainer = styled.div`
             }
         }
 
-        &[aria-current]{
-            position: relative;
-            color: #fe4d44;
-            background-color: #1f1f1f;
-
-            path{
-                fill: #fe4d44;
-            }
-
-            &::after{
-                content: '';
-                position: absolute;
-                width: 3px;
-                height: 50px;
-                background-color: #fe4d44;
-                left: 0;
-                top: 0;
-            }
-        }
-
         &.open{
             gap: 15px;
             width: 200px;
@@ -82,7 +62,7 @@ const NavLinkContainer = styled.div`
 
             p{
                 margin: 0;
-                color: #8f8f8f;
+                color: #B8B8B8;
                 font-weight: bold;
                 font-size: 14px;
                 padding-bottom: 2px;
@@ -91,14 +71,46 @@ const NavLinkContainer = styled.div`
 
             &:hover{
                 p{
-                    color: #fff;
+                    color: #000;
                 }
 
                 path{
-                    fill: #fff;
+                    fill: #000;
                 }
             }   
         }
+
+        &[aria-current]{
+            position: relative;
+            color: #002F3D;
+            background-color: #fff;
+
+            path{
+                fill: #002F3D;
+            }
+            p{
+                color: #002F3D;
+            }
+
+            &::after{
+                content: '';
+                position: absolute;
+                width: 3px;
+                height: 50px;
+                background-color: #002F3D;
+                left: 0;
+                top: 0;
+            }
+        }
+
+        @media (max-width: 768px){
+            &.open{
+                width: 100%;
+
+            }
+
+        }
+
     }
 
 
